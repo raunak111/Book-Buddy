@@ -9,35 +9,41 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountEmail: Text("data@gmail.com"),
-            accountName: Text("data"),
-            currentAccountPicture: CircleAvatar(
-              child: Text("D"),
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage("asset/data.gif"),
+                  fit: BoxFit.fill
+                )
+              ),
+              accountEmail: Text("data@gmail.com"),
+              accountName: Text("data"),
+              currentAccountPicture: CircleAvatar(
+                child: Text("D"),
+              ),
             ),
-          ),
-          
-          ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text("Favorite"),
-            onTap: (){
-              Navigator.pushNamed(context, "favorite");
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("Setting"),
-            onTap: (){},
-          ),
-          ListTile(
-            leading: Icon(Icons.info),
-            title: Text("About"),
-            onTap: (){},
-          ),
-        ],
-      ),
-    );
+            
+            ListTile(
+              leading: Icon(Icons.favorite),
+              title: Text("Favorite"),
+              onTap: (){
+                Navigator.pushNamed(context, "favorite");
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("Setting"),
+              onTap: (){},
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text("About"),
+              onTap: (){},
+            ),
+          ],
+        ),
+      );
   }
 }

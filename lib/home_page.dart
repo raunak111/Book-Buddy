@@ -13,6 +13,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.search),onPressed: (){
+              showSearch(context: context, delegate: DataSearch());
+            }),
+          ],
           elevation: 0,
         ),
         drawer: MyDrawer(),
@@ -34,6 +39,63 @@ class _HomePageState extends State<HomePage> {
               ));
             },
             itemCount: data.length));
+  }
+}
+
+class DataSearch extends SearchDelegate<String>{
+  final books= [
+    "110 Per¢",
+    "The 120 Days of Simon",
+    "Abe: Wrong for the Right Reasons",
+    "AEIOU or Any Easy Intimacy",
+    "Alec: The Years Have Pants",
+    "Das Pal",
+    "Alone Forever",
+    "Cormen",
+    "Morris Mano",
+    "American Elf (Book 2)",
+    ];
+
+  final recentbooks = ["Das Pal","Alone Forever","Cormen","Morris Mano"];
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+     return [
+      IconButton(icon: Icon(Icons.clear),onPressed: (){
+        query = "";
+      })
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+   return IconButton(icon: 
+   AnimatedIcon(icon: AnimatedIcons.menu_arrow,progress: transitionAnimation,),
+   onPressed: (){
+     close(context, null);
+   },);
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    return null;
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    final suggestionList = query.isEmpty?recentbooks:
+    books.where((p) => p.startsWith(query)).toList();
+
+    return ListView.builder(itemBuilder: (contex,index)=>ListTile(
+      leading: Icon(Icons.book),
+      title: Text(suggestionList[index]),    
+   ),
+      itemCount: suggestionList.length,
+   );
   }
 }
 
@@ -179,13 +241,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Center(
+                           /* Center(
                               child:
                                   ImageIcon(AssetImage('assets/facebook.png')),
-                            ),
+                            ),*/
                             SizedBox(width: 10.0),
                             Center(
-                              child: Text('Log in with facebook',
+                              child: Text('Log in with wtf we decide',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Montserrat')),
